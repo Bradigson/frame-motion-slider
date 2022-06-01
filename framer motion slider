@@ -1,0 +1,100 @@
+1-component 1 (slider)
+import {motion} from 'framer-motion';
+import imgs from './imgs';
+import '../App.css';
+import { useState, useEffect, useRef } from 'react';
+
+const Slider = ()=>{
+    const [width, setWith] = useState(0);
+    const carousel = useRef();
+
+    useEffect(()=>{
+        setWith(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    },[])
+    return(
+        <motion.div className='carousel' ref={carousel}>
+            <motion.div drag='x' dragConstraints={{right : 0, left : -1050}} className='inner-carousel'>
+                {
+                    imgs.map((ims,index)=>{
+                        return(
+                            <motion.div className='item' key={index}>
+                                <img src={ims}/>
+                            </motion.div>
+                        )
+                    })
+                }
+            </motion.div>
+        </motion.div>
+    )
+}
+
+
+export default Slider
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2-componente (imagenes)
+import img1 from '../assets/imgs/img1.jpg';
+import img2 from '../assets/imgs/img2.jpg';
+import img3 from '../assets/imgs/img3.jpg';
+import img4 from '../assets/imgs/img4.jpg';
+import img5 from '../assets/imgs/img5.jpg';
+import img6 from '../assets/imgs/img5.jpg';
+import img7 from '../assets/imgs/img5.jpg';
+export default [img1, img2, img3, img4, img5, img6, img7];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3-stilos (css)
+.item{
+    min-height: 15rem;
+    min-width:15rem;
+    padding: 20px;
+    background: darkcyan;
+    margin-left: 1rem;
+}
+
+ .item img{
+    width:100%;
+    height:100%;
+    border-radius: 1rem;
+    pointer-events: none;
+}
+.inner-carousel{
+    display: flex;
+    background: #d57eeb;
+    
+}
+
+.carousel{
+    padding:.3rem;
+    background: yellow;
+    cursor: grab;
+    overflow: hidden;
+    width:50%;
+}
